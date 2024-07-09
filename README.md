@@ -83,34 +83,34 @@ The Gym Management System is a full-stack web application designed to manage var
 ## Directory Structure
 gym-management-system/
 ├── client/
-│ ├── public/
-│ ├── src/
-│ │ ├── components/
-│ │ │ ├── MemberList.js
-│ │ │ ├── TrainerList.js
-│ │ │ ├── FitnessClassList.js
-│ │ │ ├── ScheduleList.js
-│ │ │ ├── AttendanceList.js
-│ │ │ ├── PaymentList.js
-│ │ ├── App.js
-│ │ ├── index.js
-│ ├── package.json
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── MemberList.js
+│   │   │   ├── TrainerList.js
+│   │   │   ├── FitnessClassList.js
+│   │   │   ├── ScheduleList.js
+│   │   │   ├── AttendanceList.js
+│   │   │   ├── PaymentList.js
+│   │   ├── App.js
+│   │   ├── index.js
+│   ├── package.json
 ├── server/
-│ ├── app.py
-│ ├── config.py
-│ ├── models.py
-│ ├── resources/
-│ │ ├── init.py
-│ │ ├── member.py
-│ │ ├── trainer.py
-│ │ ├── fitness_class.py
-│ │ ├── schedule.py
-│ │ ├── attendance.py
-│ │ ├── payment.py
-│ ├── seed.py
-│ ├── migrations/
-│ └── instance/
-│ └── app.db
+│   ├── app.py
+│   ├── config.py
+│   ├── models.py
+│   ├── resources/
+│   │   ├── __init__.py
+│   │   ├── member.py
+│   │   ├── trainer.py
+│   │   ├── fitness_class.py
+│   │   ├── schedule.py
+│   │   ├── attendance.py
+│   │   ├── payment.py
+│   ├── seed.py
+│   ├── migrations/
+│   └── instance/
+│       └── app.db
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
