@@ -81,8 +81,8 @@ The Gym Management System is a full-stack web application designed to manage var
     The client will run on `http://localhost:3000`.
 
 ## Directory Structure
-gym-management-system/
-├── client/
+.
+└── client/
 │   ├── public/
 │   ├── src/
 │   │   ├── components/
