@@ -1,0 +1,339 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Gym Management API",
+      "version": "1.0.0"
+    },
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "User Authentication",
+        "description": "Operations related to user registration and login"
+      },
+      {
+        "name": "Member Management",
+        "description": "Operations related to managing gym members"
+      },
+      {
+        "name": "Trainer Management",
+        "description": "Operations related to managing trainers"
+      },
+      {
+        "name": "Fitness Class Management",
+        "description": "Operations related to managing fitness classes"
+      },
+      {
+        "name": "Schedule Management",
+        "description": "Operations related to managing schedules"
+      },
+      {
+        "name": "Attendance Tracking",
+        "description": "Operations related to tracking attendance"
+      },
+      {
+        "name": "Payment Management",
+        "description": "Operations related to managing payments"
+      }
+    ],
+    "paths": {
+      "/register": {
+        "post": {
+          "tags": ["User Authentication"],
+          "summary": "Register a new user",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User registered successfully"
+            },
+            "400": {
+              "description": "Username or email already exists"
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+          "tags": ["User Authentication"],
+          "summary": "Login a user",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User logged in successfully"
+            },
+            "401": {
+              "description": "Invalid username or password"
+            }
+          }
+        }
+      },
+      "/members": {
+        "get": {
+          "tags": ["Member Management"],
+          "summary": "Get all members",
+          "responses": {
+            "200": {
+              "description": "List of members"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Member Management"],
+          "summary": "Create a new member",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "membership_type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Member created successfully"
+            }
+          }
+        }
+      },
+      "/trainers": {
+        "get": {
+          "tags": ["Trainer Management"],
+          "summary": "Get all trainers",
+          "responses": {
+            "200": {
+              "description": "List of trainers"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Trainer Management"],
+          "summary": "Create a new trainer",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "specialty": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Trainer created successfully"
+            }
+          }
+        }
+      },
+      "/fitness_classes": {
+        "get": {
+          "tags": ["Fitness Class Management"],
+          "summary": "Get all fitness classes",
+          "responses": {
+            "200": {
+              "description": "List of fitness classes"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Fitness Class Management"],
+          "summary": "Create a new fitness class",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "trainer_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Fitness class created successfully"
+            }
+          }
+        }
+      },
+      "/schedules": {
+        "get": {
+          "tags": ["Schedule Management"],
+          "summary": "Get all schedules",
+          "responses": {
+            "200": {
+              "description": "List of schedules"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Schedule Management"],
+          "summary": "Create a new schedule",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fitness_class_id": {
+                    "type": "integer"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Schedule created successfully"
+            }
+          }
+        }
+      },
+      "/attendances": {
+        "get": {
+          "tags": ["Attendance Tracking"],
+          "summary": "Get all attendances",
+          "responses": {
+            "200": {
+              "description": "List of attendances"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Attendance Tracking"],
+          "summary": "Create a new attendance",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "member_id": {
+                    "type": "integer"
+                  },
+                  "fitness_class_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Attendance created successfully"
+            }
+          }
+        }
+      },
+      "/payments": {
+        "get": {
+          "tags": ["Payment Management"],
+          "summary": "Get all payments",
+          "responses": {
+            "200": {
+              "description": "List of payments"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Payment Management"],
+          "summary": "Create a new payment",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "member_id": {
+                    "type": "integer"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Payment created successfully"
+            }
+          }
+        }
+      }
+    }
+  }
+  
