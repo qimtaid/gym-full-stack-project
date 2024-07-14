@@ -1,4 +1,5 @@
 import random
+import logging
 from flask import Flask, jsonify
 from datetime import timedelta
 from flask_cors import CORS
@@ -8,16 +9,20 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from config import Config
 from extensions import db, bcrypt, jwt
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Initialize logging
+    logging.basicConfig(level=logging.DEBUG)
 
     # Initialize extensions
     db.init_app(app)
     Migrate(app, db)
     bcrypt.init_app(app)
     jwt.init_app(app)
-    CORS(app)
+    CORS(app)  # Enable CORS globally
 
     api = Api(app)
 
@@ -34,7 +39,7 @@ def create_app():
 
     @app.route('/')
     def index():
-        return jsonify({"message": "Welcome to the Gym Management System  API"})
+        return jsonify({"message": "Welcome to the Gym Management System API"})
 
     return app
 

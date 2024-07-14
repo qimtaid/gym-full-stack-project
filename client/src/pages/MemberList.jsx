@@ -7,7 +7,7 @@ const MemberList = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get('/members');
+        const response = await axios.get('http://localhost:5000/members');
         setMembers(response.data);
       } catch (error) {
         console.error('Error fetching members:', error);

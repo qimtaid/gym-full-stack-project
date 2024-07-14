@@ -1,63 +1,58 @@
 from flask import Blueprint, request, jsonify
 from models import User
-from app import db
-from flask_jwt_extended import create_access_token, jwt_required
+from extensions import db
+from flask_jwt_extended import create_access_token
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/register', methods=['POST'])
+@bp.route('/register', methods=['POST', 'OPTIONS'])
 def register():
-    from flask_wtf import FlaskForm
-    from wtforms import StringField, PasswordField
-    from wtforms.validators import InputRequired
+    if request.method == 'OPTIONS':
+        return '', 204
 
-    class RegisterForm(FlaskForm):
-        username = StringField('username', validators=[InputRequired()])
-        email = StringField('email', validators=[InputRequired()])
-        password = PasswordField('password', validators=[InputRequired()])
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No input data provided"}), 400
 
-    form = RegisterForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        email = form.email.data
-        password = form.password.data
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
 
-        if User.query.filter_by(username=username).first():
-            return jsonify({"error": "Username already exists"}), 400
+    if not username or not email or not password:
+        return jsonify({"error": "Missing fields"}), 400
 
-        if User.query.filter_by(email=email).first():
-            return jsonify({"error": "Email already exists"}), 400
+    if User.query.filter_by(username=username).first():
+        return jsonify({"error": "Username already exists"}), 400
 
-        new_user = User(username=username, email=email)
-        new_user.set_password(password)
-        db.session.add(new_user)
-        db.session.commit()
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "Email already exists"}), 400
 
-        return jsonify({"message": "User registered successfully"}), 201
+    new_user = User(username=username, email=email)
+    new_user.set_password(password)
+    db.session.add(new_user)
+    db.session.commit()
 
-    return jsonify({"error": "Invalid request"}), 400
+    return jsonify({"message": "User registered successfully"}), 201
 
-@bp.route('/login', methods=['POST'])
+@bp.route('/login', methods=['POST', 'OPTIONS'])
 def login():
-    from flask_wtf import FlaskForm
-    from wtforms import StringField, PasswordField
-    from wtforms.validators import InputRequired
+    if request.method == 'OPTIONS':
+        return '', 204
 
-    class LoginForm(FlaskForm):
-        username = StringField('username', validators=[InputRequired()])
-        password = PasswordField('password', validators=[InputRequired()])
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No input data provided"}), 400
 
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+    username = data.get('username')
+    password = data.get('password')
 
-        user = User.query.filter_by(username=username).first()
+    if not username or not password:
+        return jsonify({"error": "Missing fields"}), 400
 
-        if user is None or not user.check_password(password):
-            return jsonify({"error": "Invalid username or password"}), 401
+    user = User.query.filter_by(username=username).first()
 
-        access_token = create_access_token(identity=username)
-        return jsonify({"access_token": access_token}), 200
+    if user is None or not user.check_password(password):
+        return jsonify({"error": "Invalid username or password"}), 401
 
-    return jsonify({"error": "Invalid request"}), 400
+    access_token = create_access_token(identity=username)
+    return jsonify({"access_token": access_token}), 200

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function TrainerList() {
+const TrainerList = () => {
   const [trainers, setTrainers] = useState([]);
 
   useEffect(() => {
+    const fetchTrainers = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/trainers');
+        setTrainers(response.data);
+      } catch (error) {
+        console.error('Error fetching trainers:', error);
+      }
+    };
+
     fetchTrainers();
   }, []);
-
-  const fetchTrainers = async () => {
-    try {
-      const response = await axios.get('/trainers');
-      setTrainers(response.data);
-    } catch (error) {
-      console.error('Error fetching trainers:', error);
-    }
-  };
 
   return (
     <div>

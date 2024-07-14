@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function FitnessClassList() {
+const FitnessClassList = () => {
   const [fitnessClasses, setFitnessClasses] = useState([]);
 
   useEffect(() => {
+    const fetchFitnessClasses = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/fitness_classes');
+        setFitnessClasses(response.data);
+      } catch (error) {
+        console.error('Error fetching fitness classes:', error);
+      }
+    };
+
     fetchFitnessClasses();
   }, []);
-
-  const fetchFitnessClasses = async () => {
-    try {
-      const response = await axios.get('/fitness_classes');
-      setFitnessClasses(response.data);
-    } catch (error) {
-      console.error('Error fetching fitness classes:', error);
-    }
-  };
 
   return (
     <div>
       <h2>Fitness Class Management</h2>
       <ul>
         {fitnessClasses.map(fitnessClass => (
-          <li key={fitnessClass.id}>{fitnessClass.name} - {fitnessClass.time}</li>
+          <li key={fitnessClass.id}>{fitnessClass.name}</li>
         ))}
       </ul>
     </div>
