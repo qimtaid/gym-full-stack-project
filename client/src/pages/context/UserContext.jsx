@@ -44,6 +44,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const logout = async () => {
+    console.log("Logging out...");
     try {
       const response = await axios.post('http://localhost:5000/logout', {}, {
         headers: {
@@ -51,16 +52,21 @@ export const UserProvider = ({ children }) => {
         }
       });
       if (response.data.success) {
+        console.log("Logout successful");
         setAuthToken(null);
         localStorage.removeItem('token');
+        setCurrentUser(null);
         nav('/login');
       } else {
+        console.error("Logout failed:", response.data.error);
         alert("Something went wrong");
       }
     } catch (error) {
       console.error("Error during logout:", error);
+      alert("An error occurred during logout");
     }
   };
+  
 
   useEffect(() => {
     if (authToken) {

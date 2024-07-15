@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
 const TrainerForm = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [specialty, setSpecialty] = useState('');
 
@@ -27,11 +27,11 @@ const TrainerForm = () => {
 
     if (id) {
       axios.put(`http://localhost:5000/trainers/${id}`, trainer)
-        .then(() => history.push('/trainers'))
+        .then(() => navigate('/trainers'))
         .catch(error => console.error('Error updating trainer:', error));
     } else {
       axios.post('http://localhost:5000/trainers', trainer)
-        .then(() => history.push('/trainers'))
+        .then(() => navigate('/trainers'))
         .catch(error => console.error('Error creating trainer:', error));
     }
   };

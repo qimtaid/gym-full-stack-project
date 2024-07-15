@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function NoPage() {
+export default function About() {
   return (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
       <h2>About Gym Management System</h2>

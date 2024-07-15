@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
 const MemberForm = () => {
   const { id } = useParams();
-  const history = useHistory();
   const [name, setName] = useState('');
   const [membershipType, setMembershipType] = useState('');
 
@@ -20,19 +19,22 @@ const MemberForm = () => {
     }
   }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const member = { name, membership_type: membershipType };
 
-    if (id) {
-      axios.put(`http://localhost:5000/members/${id}`, member)
-        .then(() => history.push('/members'))
-        .catch(error => console.error('Error updating member:', error));
-    } else {
-      axios.post('http://localhost:5000/members', member)
-        .then(() => history.push('/members'))
-        .catch(error => console.error('Error creating member:', error));
+    try {
+      if (id) {
+        await axios.put(`http://localhost:5000/members/${id}`, member);
+      } else {
+        await axios.post('http://localhost:5000/members', member);
+      }
+      
+      // Redirect to /members after successful submission
+      window.location.href = '/members';
+    } catch (error) {
+      console.error('Error submitting member form:', error);
     }
   };
 

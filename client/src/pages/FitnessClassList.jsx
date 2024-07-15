@@ -9,7 +9,7 @@ const FitnessClassList = () => {
   useEffect(() => {
     const fetchFitnessClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/fitness-classes');
+        const response = await axios.get('http://localhost:5000/fitness_classes');
         setFitnessClasses(response.data);
       } catch (error) {
         console.error('Error fetching fitness classes:', error);

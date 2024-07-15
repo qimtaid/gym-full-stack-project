@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
 const FitnessClassForm = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [trainerId, setTrainerId] = useState('');
   const [trainers, setTrainers] = useState([]);
@@ -41,11 +41,11 @@ const FitnessClassForm = () => {
 
     if (id) {
       axios.put(`http://localhost:5000/fitness-classes/${id}`, fitnessClass)
-        .then(() => history.push('/fitness-classes'))
+        .then(() => navigate('/fitness-classes'))
         .catch(error => console.error('Error updating fitness class:', error));
     } else {
       axios.post('http://localhost:5000/fitness-classes', fitnessClass)
-        .then(() => history.push('/fitness-classes'))
+        .then(() => navigate('/fitness-classes'))
         .catch(error => console.error('Error creating fitness class:', error));
     }
   };

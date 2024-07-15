@@ -2,15 +2,22 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./Layout";
-import NoPage from './pages/NoPage';
+import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import MemberList from './pages/MemberList';
+import MemberForm from './pages/MemberForm';
 import TrainerList from './pages/TrainerList';
+import TrainerForm from './pages/TrainerForm';
 import FitnessClassList from './pages/FitnessClassList';
+import FitnessClassForm from './pages/FitnessClassForm';
+import ScheduleList from './pages/ScheduleList';
+import PaymentList from './pages/PaymentList';
+import AttendanceList from './pages/AttendanceList';
 import { UserProvider } from './pages/context/UserContext';
 import { TaskProvider } from './pages/context/TaskContext';
+
 
 function App() {
   return (
@@ -24,9 +31,18 @@ function App() {
               <Route path='register' element={<Register />} />
               <Route path='login' element={<Login />} />
               <Route path='members' element={<MemberList />} />
+              <Route path='add-member' element={<MemberForm />} />
+              <Route path='edit-member/:id' element={<MemberForm />} />
+              <Route path='add-trainer' element={<TrainerForm />} />
+              <Route path='edit-trainer/:id' element={<TrainerForm />} />
+              <Route path='add-fitness-class' element={<FitnessClassForm />} />
+              <Route path='edit-fitness-class/:id' element={<FitnessClassForm />} />
+              <Route path='schedules' element={<ScheduleList />} />              
               <Route path='trainers' element={<TrainerList />} />
+              <Route path='payments' element={<PaymentList />} />
+              <Route path='attendance' element={<AttendanceList />} />
               <Route path='fitness-classes' element={<FitnessClassList />} />
-              <Route path='*' element={<NoPage />} />
+              <Route path='about' element={<About />} />
             </Route>
           </Routes>
         </TaskProvider>

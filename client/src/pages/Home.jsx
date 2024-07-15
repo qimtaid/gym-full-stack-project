@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Home = () => {
+  console.log('Rendering Home');
   return (
     <section className="bg-light">
       <div className="container py-5 py-lg-0 min-vh-100 d-flex align-items-center justify-content-center">
@@ -16,13 +17,13 @@ const Home = () => {
               href="/dashboard"
               className="btn btn-danger text-white px-4 py-2 shadow-sm hover:bg-danger focus:outline-none focus:ring active:bg-danger"
             >
-              Get Started
+             Go To Dashboard
             </a>
             <a
               href="/about"
               className="btn btn-outline-danger text-danger px-4 py-2 shadow-sm hover-text-danger focus:outline-none focus:ring active:text-danger"
             >
-              Learn More
+              About Us
             </a>
           </div>
         </div>
