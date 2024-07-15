@@ -6,8 +6,18 @@ name = "pypi"
 [packages]
 flask = "*"
 cors = "*"
+jwt = "==1.6.4"
+flask-jwt-extended = "*"
+bcrypt = "*"
+flask-swagger-ui = "*"
+flask-bcrypt = "*"
+flask-jwt = "*"
+pyjwt = "*"
+flask-cors = "*"
+flask-migrate = "*"
+flask-restful = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.10.12"

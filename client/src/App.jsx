@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import MemberList from './pages/MemberList';
 import TrainerList from './pages/TrainerList';
-import FitnessClassList from './pages/FitnessClasses';
+import FitnessClassList from './pages/FitnessClassList';
 import { UserProvider } from './pages/context/UserContext';
 import { TaskProvider } from './pages/context/TaskContext';
 

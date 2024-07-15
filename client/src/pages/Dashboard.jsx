@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/UserContext';
+import '../App.css';
 
 function Dashboard() {
   const { currentUser } = useContext(UserContext);
@@ -16,11 +17,11 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="dashboard-container">
       <h2>Dashboard</h2>
       <div className="card mb-3">
         <div className="card-body">
-          <h3 className="card-title">Welcome, {currentUser.name}</h3>
+          <h3 className="card-title">Welcome, {currentUser.username}</h3>
           <p className="card-text">Email: {currentUser.email}</p>
         </div>
       </div>
@@ -59,7 +60,38 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Add more cards for other sections as needed */}
+        {/* Schedule Management Card */}
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Schedule Management</h5>
+            <p className="card-text">Manage class schedules.</p>
+            <Link to="/schedules" className="btn btn-primary">
+              Go to Schedules
+            </Link>
+          </div>
+        </div>
+
+        {/* Attendance Tracking Card */}
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Attendance Tracking</h5>
+            <p className="card-text">Track attendance for classes.</p>
+            <Link to="/attendance" className="btn btn-primary">
+              Go to Attendance
+            </Link>
+          </div>
+        </div>
+
+        {/* Payment Management Card */}
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Payment Management</h5>
+            <p className="card-text">Manage payments from members.</p>
+            <Link to="/payments" className="btn btn-primary">
+              Go to Payments
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

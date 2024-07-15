@@ -1,0 +1,145 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F3EDC8;
+  color: #7D0A0A;
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  color: #7D0A0A;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+h3 {
+  margin-top: 10px;
+}
+
+button, .btn-primary, .btn-secondary, .btn-danger {
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover, .btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
+  background-color: #7D0A0A;
+}
+
+button:disabled {
+  background-color: #EAD196;
+  cursor: not-allowed;
+}
+
+input[type="text"], button, .btn-primary, .btn-secondary, .btn-danger {
+  display: block;
+  margin: 10px auto;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border: 1px solid #7D0A0A;
+  border-radius: 3px;
+}
+
+/* Table styles */
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #7D0A0A;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #BF3131;
+  color: #F3EDC8;
+}
+
+tr:nth-child(even) {
+  background-color: #EAD196;
+}
+
+tr:nth-child(odd) {
+  background-color: #F3EDC8;
+}
+
+.table-striped {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #BF3131;
+  border-color: #BF3131;
+}
+
+.btn-primary:hover {
+  background-color: #EAD196;
+  border-color: #EAD196;
+  color: #7D0A0A;
+}
+
+.btn-secondary {
+  background-color: #7D0A0A;
+  border-color: #7D0A0A;
+}
+
+.btn-secondary:hover {
+  background-color: #BF3131;
+  border-color: #BF3131;
+}
+
+.btn-danger {
+  background-color: #EAD196;
+  border-color: #EAD196;
+  color: #7D0A0A;
+}
+
+.btn-danger:hover {
+  background-color: #BF3131;
+  border-color: #BF3131;
+  color: white;
+}
+
+/* Container styles */
+.dashboard-container, .member-list, .trainer-list, .fitness-class-list, .schedule-list, .attendance-list {
+  padding: 20px;
+}
+
+/* Card styles */
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 20px);
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: #7D0A0A;
+}
+
+/* Form styles */
+.member-form, .trainer-form, .fitness-class-form, .schedule-form, .attendance-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}

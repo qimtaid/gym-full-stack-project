@@ -4,8 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+flask = "*"
+cors = "*"
+jwt = "*"
+flask-jwt-extended = "*"
+bcrypt = "*"
+flask-swagger-ui = "*"
+flask-bcrypt = "*"
+flask-jwt = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.10.12"
