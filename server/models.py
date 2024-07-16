@@ -68,6 +68,7 @@ class Schedule(db.Model):
 class Attendance(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     member_id = db.Column(db.Integer, db.ForeignKey('member.id'), nullable=False)
+    date = db.Column(db.String(50), nullable=False)
     fitness_class_id = db.Column(db.Integer, db.ForeignKey('fitness_class.id'), nullable=False)
     member = db.relationship('Member')
     fitness_class = db.relationship('FitnessClass')
@@ -76,6 +77,7 @@ class Attendance(db.Model):
         return {
             'id': self.id,
             'member_id': self.member_id,
+            'date': self.date,
             'fitness_class_id': self.fitness_class_id,
             'member': self.member.to_dict(),
             'fitness_class': self.fitness_class.to_dict()

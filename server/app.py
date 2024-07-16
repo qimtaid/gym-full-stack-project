@@ -57,33 +57,33 @@ def create_app():
     
     # ...
 
-    @app.route('/trainers/<int:id>', methods=['OPTIONS', 'GET', 'PUT', 'DELETE'])
-    def trainer_options(id):
-        if request.method == 'OPTIONS':
-            return '', 204
-        elif request.method == 'GET':
-            trainer = Trainer.query.get(id)
-            if trainer:
-                return jsonify({'name': trainer.name, 'pecialty': trainer.specialty})
-            else:
-                return jsonify({'error': 'Trainer not found'}), 404
-        elif request.method == 'PUT':
-            trainer = Trainer.query.get(id)
-            if trainer:
-                trainer.name = request.json.get('name', trainer.name)
-                trainer.specialty = request.json.get('specialty', trainer.specialty)
-                db.session.commit()
-                return jsonify({'message': 'Trainer updated successfully'})
-            else:
-                return jsonify({'error': 'Trainer not found'}), 404
-        elif request.method == 'DELETE':
-            trainer = Trainer.query.get(id)
-            if trainer:
-                db.session.delete(trainer)
-                db.session.commit()
-                return jsonify({'message': 'Trainer deleted successfully'})
-            else:
-                return jsonify({'error': 'Trainer not found'}), 404
+    # @app.route('/trainers/<int:id>', methods=['OPTIONS', 'GET', 'PUT', 'DELETE'])
+    # def trainer_options(id):
+    #     if request.method == 'OPTIONS':
+    #         return '', 204
+    #     elif request.method == 'GET':
+    #         trainer = Trainer.query.get(id)
+    #         if trainer:
+    #             return jsonify({'name': trainer.name, 'pecialty': trainer.specialty})
+    #         else:
+    #             return jsonify({'error': 'Trainer not found'}), 404
+    #     elif request.method == 'PUT':
+    #         trainer = Trainer.query.get(id)
+    #         if trainer:
+    #             trainer.name = request.json.get('name', trainer.name)
+    #             trainer.specialty = request.json.get('specialty', trainer.specialty)
+    #             db.session.commit()
+    #             return jsonify({'message': 'Trainer updated successfully'})
+    #         else:
+    #             return jsonify({'error': 'Trainer not found'}), 404
+    #     elif request.method == 'DELETE':
+    #         trainer = Trainer.query.get(id)
+    #         if trainer:
+    #             db.session.delete(trainer)
+    #             db.session.commit()
+    #             return jsonify({'message': 'Trainer deleted successfully'})
+    #         else:
+    #             return jsonify({'error': 'Trainer not found'}), 404
 
     return app
 

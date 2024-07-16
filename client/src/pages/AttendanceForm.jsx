@@ -15,7 +15,7 @@ const AttendanceForm = () => {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/members');
+        const response = await axios.get('http://localhost:5000/attendance');
         setMembers(response.data);
       } catch (error) {
         console.error('Error fetching members:', error);
@@ -24,7 +24,7 @@ const AttendanceForm = () => {
 
     const fetchFitnessClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/fitness-classes');
+        const response = await axios.get('http://localhost:5000/attendance');
         setFitnessClasses(response.data);
       } catch (error) {
         console.error('Error fetching fitness classes:', error);
