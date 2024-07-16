@@ -19,7 +19,7 @@ def create_app():
     Migrate(app, db)
     bcrypt.init_app(app)
     jwt.init_app(app)
-
+    
     # Enable CORS globally for all routes
     CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 
@@ -41,7 +41,7 @@ def create_app():
     with app.app_context():
         from routes import initialize_routes
         initialize_routes(api)
-        db.create_all()
+        db.create_all()  # For development only. Use migrations in production.
 
     @app.route('/')
     def index():
@@ -54,37 +54,13 @@ def create_app():
             return '', 204
         # Implement your logout logic here
         return jsonify({"message": "Successfully logged out"}), 200
+
+    # Ensure all routes handle OPTIONS requests correctly
+    @app.before_request
+    def handle_options_requests():
+        if request.method == 'OPTIONS':
+            return '', 204
     
-    # ...
-
-    # @app.route('/trainers/<int:id>', methods=['OPTIONS', 'GET', 'PUT', 'DELETE'])
-    # def trainer_options(id):
-    #     if request.method == 'OPTIONS':
-    #         return '', 204
-    #     elif request.method == 'GET':
-    #         trainer = Trainer.query.get(id)
-    #         if trainer:
-    #             return jsonify({'name': trainer.name, 'pecialty': trainer.specialty})
-    #         else:
-    #             return jsonify({'error': 'Trainer not found'}), 404
-    #     elif request.method == 'PUT':
-    #         trainer = Trainer.query.get(id)
-    #         if trainer:
-    #             trainer.name = request.json.get('name', trainer.name)
-    #             trainer.specialty = request.json.get('specialty', trainer.specialty)
-    #             db.session.commit()
-    #             return jsonify({'message': 'Trainer updated successfully'})
-    #         else:
-    #             return jsonify({'error': 'Trainer not found'}), 404
-    #     elif request.method == 'DELETE':
-    #         trainer = Trainer.query.get(id)
-    #         if trainer:
-    #             db.session.delete(trainer)
-    #             db.session.commit()
-    #             return jsonify({'message': 'Trainer deleted successfully'})
-    #         else:
-    #             return jsonify({'error': 'Trainer not found'}), 404
-
     return app
 
 if __name__ == "__main__":

@@ -14,6 +14,7 @@ const AttendanceList = () => {
   const [editMode, setEditMode] = useState(false);
   const [editAttendanceId, setEditAttendanceId] = useState(null);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchAttendances = async () => {
