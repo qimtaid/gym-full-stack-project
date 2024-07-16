@@ -7,9 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import MemberList from './pages/MemberList';
-
 import TrainerList from './pages/TrainerList';
-import TrainerForm from './pages/TrainerForm';
 import FitnessClassList from './pages/FitnessClassList';
 import ScheduleList from './pages/ScheduleList';
 import PaymentList from './pages/PaymentList';

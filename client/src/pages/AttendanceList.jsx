@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
-
 const AttendanceList = () => {
   const [attendances, setAttendances] = useState([]);
   const [members, setMembers] = useState([]);
@@ -12,6 +11,8 @@ const AttendanceList = () => {
   const [fitnessClassId, setFitnessClassId] = useState('');
   const [date, setDate] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editAttendanceId, setEditAttendanceId] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -73,6 +74,58 @@ const AttendanceList = () => {
     }
   };
 
+  const handleEditAttendance = async (attendanceId) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/attendance/${attendanceId}`, {
+        memberId,
+        fitnessClassId,
+        date
+      });
+      // Update the attendance in the list
+      const updatedAttendances = attendances.map(att => {
+        if (att.id === attendanceId) {
+          return response.data;
+        }
+        return att;
+      });
+      setAttendances(updatedAttendances);
+      setMemberId('');
+      setFitnessClassId('');
+      setDate('');
+      setEditMode(false);
+      setEditAttendanceId(null);
+      setError(null); // Clear any previous errors
+    } catch (error) {
+      console.error('Error editing attendance:', error);
+      setError('Failed to edit attendance. Please try again.'); // Set error message
+    }
+  };
+
+  const handleDeleteAttendance = async (attendanceId) => {
+    try {
+      await axios.delete(`http://localhost:5000/attendance/${attendanceId}`);
+      // Filter out the deleted attendance from the list
+      const updatedAttendances = attendances.filter(att => att.id !== attendanceId);
+      setAttendances(updatedAttendances);
+      setError(null); // Clear any previous errors
+    } catch (error) {
+      console.error('Error deleting attendance:', error);
+      setError('Failed to delete attendance. Please try again.'); // Set error message
+    }
+  };
+
+  const handleEditButtonClick = (attendanceId) => {
+    const attendanceToEdit = attendances.find(att => att.id === attendanceId);
+    if (attendanceToEdit) {
+      setMemberId(attendanceToEdit.member.id);
+      setFitnessClassId(attendanceToEdit.fitness_class.id);
+      setDate(attendanceToEdit.date);
+      setEditMode(true);
+      setEditAttendanceId(attendanceId);
+      setShowForm(true);
+    }
+  };
+
   return (
     <div className="attendance-list">
       <h2>Attendance List</h2>
@@ -83,9 +136,9 @@ const AttendanceList = () => {
         {showForm ? 'Hide Form' : 'Add New Attendance'}
       </button>
 
-      {/* Add Attendance Form */}
+      {/* Add/Edit Attendance Form */}
       {showForm && (
-        <form onSubmit={handleAddAttendance} className="mb-3">
+        <form onSubmit={editMode ? () => handleEditAttendance(editAttendanceId) : handleAddAttendance} className="mb-3">
           <div className="row g-3">
             <div className="col-sm-4">
               <label htmlFor="memberId" className="form-label">Member</label>
@@ -129,7 +182,7 @@ const AttendanceList = () => {
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary mt-3">Add Attendance</button>
+          <button type="submit" className="btn btn-primary mt-3">{editMode ? 'Edit Attendance' : 'Add Attendance'}</button>
           {error && <div className="text-danger mt-2">{error}</div>} {/* Display error message if there's an error */}
         </form>
       )}
@@ -151,8 +204,8 @@ const AttendanceList = () => {
               <td>{attendance.fitness_class.name}</td>
               <td>{attendance.date}</td>
               <td>
-                <Link to={`/edit-attendance/${attendance.id}`} className="btn btn-secondary">Edit</Link>
-                <button className="btn btn-danger ml-2">Delete</button>
+                <button onClick={() => handleEditButtonClick(attendance.id)} className="btn btn-secondary">Edit</button>
+                <button onClick={() => handleDeleteAttendance(attendance.id)} className="btn btn-danger ml-2">Delete</button>
               </td>
             </tr>
           ))}
