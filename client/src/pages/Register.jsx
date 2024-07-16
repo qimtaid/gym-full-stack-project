@@ -27,7 +27,7 @@ function Register() {
   };
 
   return (
-    <section className="bg-light py-3 py-md-5">
+    <section id="home"  className="bg-light py-3 py-md-5">
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">

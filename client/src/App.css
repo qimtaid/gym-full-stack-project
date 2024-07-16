@@ -145,3 +145,36 @@ tr:nth-child(odd) {
 .form-group {
   margin-bottom: 15px;
 }
+
+#home {
+  background-image: url(../public/gym4.jpg);
+  background-size:cover;
+}
+
+/* App.css */
+
+.about-section {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.about-content p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.about-content a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about-content a:hover {
+  text-decoration: underline;
+}

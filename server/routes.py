@@ -107,7 +107,7 @@ class FitnessClassListResource(Resource):
         fitness_classes = FitnessClass.query.all()
         return jsonify([fitness_class.to_dict() for fitness_class in fitness_classes])
 
-# Define other resources with the `options` method as needed...
+
 
 def initialize_routes(api):
     api.add_resource(UserRegister, '/auth/register')

@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './context/UserContext'; // Corrected import path
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { login } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,14 +15,14 @@ function Login() {
     const success = await login(username, password);
     if (success) {
       console.log('Login successful'); // Debugging log
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } else {
       console.log('Login failed'); // Debugging log
     }
   };
 
   return (
-    <section className="bg-light py-3 py-md-5">
+    <section id="home"  className="bg-light py-3 py-md-5">
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">

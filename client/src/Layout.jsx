@@ -8,13 +8,18 @@ export default function Layout() {
   console.log('Rendering Layout');
   const { currentUser, logout } = useContext(UserContext);
 
+  const handleLogout = () => {
+    console.log("Logout clicked");
+    logout();
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light pt-4">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <Link to="/" className="navbar-brand">
             <h3>Gym Yetu</h3>
-          </a>
+          </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -29,7 +34,7 @@ export default function Layout() {
                     <Link to="/dashboard" className="nav-link active fs-5">Dashboard</Link>
                   </li>
                   <li className="nav-item">
-                    <span onClick={() => { console.log("Logout clicked"); logout(); }} className="nav-link active fs-5" style={{ cursor: 'pointer' }}>Logout</span>
+                    <span onClick={handleLogout} className="nav-link active fs-5" style={{ cursor: 'pointer' }}>Logout</span>
                   </li>
                 </>
               ) : (

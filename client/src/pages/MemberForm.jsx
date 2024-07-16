@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
 const MemberForm = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [membershipType, setMembershipType] = useState('');
 
@@ -30,9 +31,9 @@ const MemberForm = () => {
       } else {
         await axios.post('http://localhost:5000/members', member);
       }
-      
+
       // Redirect to /members after successful submission
-      window.location.href = '/members';
+      navigate('/members');
     } catch (error) {
       console.error('Error submitting member form:', error);
     }

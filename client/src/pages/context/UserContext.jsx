@@ -4,6 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 export const UserContext = createContext();
+axios.defaults.withCredentials = true;
 
 export const UserProvider = ({ children }) => {
   const nav = useNavigate();
@@ -51,7 +52,7 @@ export const UserProvider = ({ children }) => {
           'Authorization': `Bearer ${authToken}`
         }
       });
-      if (response.data.success) {
+      if (response.data.message) {
         console.log("Logout successful");
         setAuthToken(null);
         localStorage.removeItem('token');
@@ -66,7 +67,6 @@ export const UserProvider = ({ children }) => {
       alert("An error occurred during logout");
     }
   };
-  
 
   useEffect(() => {
     if (authToken) {

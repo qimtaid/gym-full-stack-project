@@ -45,7 +45,11 @@ def register():
 @bp.route('/login', methods=['POST', 'OPTIONS'])
 def login():
     if request.method == 'OPTIONS':
-        return jsonify({"message": "CORS preflight"}), 200
+        response = jsonify({'status': 'OK'})
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        return response
 
     try:
         data = request.get_json()

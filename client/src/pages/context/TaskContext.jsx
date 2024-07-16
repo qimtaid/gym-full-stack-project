@@ -4,13 +4,15 @@ import axios from "axios";
 export const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
+/* This code snippet is a React component that defines a `TaskProvider` component using the Context
+API. Here's a breakdown of what the code is doing: */
   const [tasks, setTasks] = useState([]);
 
   // Fetch tasks from the server when the component mounts
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/tasks");
+        const response = await axios.get("http://localhost:5000/members");
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -23,7 +25,7 @@ export const TaskProvider = ({ children }) => {
   // Add a new task
   const addTask = async (task) => {
     try {
-      const response = await axios.post("http://localhost:5000/tasks", task);
+      const response = await axios.post("http://localhost:5000/members", task);
       setTasks([...tasks, response.data]);
     } catch (error) {
       console.error("Error adding task:", error);
@@ -33,7 +35,7 @@ export const TaskProvider = ({ children }) => {
   // Edit an existing task
   const editTask = async (id, updatedTask) => {
     try {
-      const response = await axios.put(`http://localhost:5000/tasks/${id}`, updatedTask);
+      const response = await axios.put(`http://localhost:5000/members/${id}`, updatedTask);
       setTasks(tasks.map(task => (task.id === id ? response.data : task)));
     } catch (error) {
       console.error("Error editing task:", error);
@@ -63,3 +65,4 @@ export const TaskProvider = ({ children }) => {
     </TaskContext.Provider>
   );
 };
+

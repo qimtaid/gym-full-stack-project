@@ -19,6 +19,15 @@ const TrainerList = () => {
     fetchTrainers();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/trainers/${id}`);
+      setTrainers(trainers.filter((trainer) => trainer.id!== id));
+    } catch (error) {
+      console.error('Error deleting trainer:', error);
+    }
+  };
+
   return (
     <div className="trainer-list">
       <h2>Trainer List</h2>
@@ -32,13 +41,13 @@ const TrainerList = () => {
           </tr>
         </thead>
         <tbody>
-          {trainers.map(trainer => (
+          {trainers.map((trainer) => (
             <tr key={trainer.id}>
               <td>{trainer.name}</td>
               <td>{trainer.specialty}</td>
               <td>
                 <Link to={`/edit-trainer/${trainer.id}`} className="btn btn-secondary">Edit</Link>
-                <button className="btn btn-danger ml-2">Delete</button>
+                <button className="btn btn-danger ml-2" onClick={() => handleDelete(trainer.id)}>Delete</button>
               </td>
             </tr>
           ))}
